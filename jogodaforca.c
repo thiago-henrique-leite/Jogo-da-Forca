@@ -1,6 +1,6 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
 //CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
-//Última Atualização 23/07/2020
+//Ultima Atualização em 23/julho/2020
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -278,26 +278,26 @@ void jogo_da_forca() {
 void resultado() {
     
     if(cont <= 0 || c == '#') {
-        printf("\n\t  INFELIZMENTE VOCÊ PERDEU, TENTE NOVAMENTE! A PALAVRA ERA --> %s <--", palavra_sorteada);
-        printf("\n\t                                      __       ");
-        printf("\n\t                                     |  |      ");
-        printf("\n\t                                 ____|  |____  ");
-        printf("\n\t                                |____    ____| ");
-        printf("\n\t                                     |  |      ");
-        printf("\n\t                                     |  |      ");
-        printf("\n\t                                     |  |      ");
-        printf("\n\t                                     |__|      ");
+        printf("\n\t\t\tINFELIZMENTE VOCÊ PERDEU, TENTE NOVAMENTE! A PALAVRA ERA --> %s <--", palavra_sorteada);
+        printf("\n\t\t\t\t\t\t\t      __       ");
+        printf("\n\t\t\t\t\t\t\t     |  |      ");
+        printf("\n\t\t\t\t\t\t\t ____|  |____  ");
+        printf("\n\t\t\t\t\t\t\t|____    ____| ");
+        printf("\n\t\t\t\t\t\t\t     |  |      ");
+        printf("\n\t\t\t\t\t\t\t     |  |      ");
+        printf("\n\t\t\t\t\t\t\t     |  |      ");
+        printf("\n\t\t\t\t\t\t\t     |__|      ");
         printf("\n");
     } 
     else {
-        printf("\t  PARABÉNS, VOCÊ GANHOU!");
-        printf("\n\t                   __ ");
-        printf("\n\t                  |  |");
-        printf("\n\t            ______|  |");
-        printf("\n\t           |______   |");
-        printf("\n\t           |______   |");
-        printf("\n\t        ___|______   |");
-        printf("\n\t       |_____________|");
+        printf("\t\t\t\t\t\tPARABÉNS, VOCÊ GANHOU!");
+        printf("\n\t\t\t\t\t\t              __ ");
+        printf("\n\t\t\t\t\t\t             |  |");
+        printf("\n\t\t\t\t\t\t       ______|  |");
+        printf("\n\t\t\t\t\t\t      |______   |");
+        printf("\n\t\t\t\t\t\t      |______   |");
+        printf("\n\t\t\t\t\t\t   ___|______   |");
+        printf("\n\t\t\t\t\t\t  |_____________|");
         printf("\n");
     }
     
