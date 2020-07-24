@@ -10,10 +10,13 @@
 //CABEÇALHO DE FUNÇÕES <jogodaforca.h>
 void inicia_variaveis();
 int letra_repetida(char);
+void regras();
+void creditos();
 void modo_de_jogo();
 void escolha_da_palavra();
 void sorteiaPalavra();
 void abertura();
+int tela_inicial();
 void inicia_palavra();
 void imprime_palavra();
 void iniciaVetor();
@@ -29,10 +32,10 @@ void resultado();
 
 //******************************************************************VÁRIÁVEIS GLOBAIS***************************************************************************************
 
-char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], c; 
-int num_chutes, max_chutes, indice, certas, encontrou, indice_dica, tam_palavra, cont, erros, modoJogo, quant_letras;
+char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], inicio, modoJogo, c; 
+int num_chutes, max_chutes, indice, certas, encontrou, indice_dica, tam_palavra, cont, erros, quant_letras;
 char *letras_tentadas;
-
+ 
 //BANCO DE PALAVRAS
 char bancodePalavras[100][maxtam] = 
     {
@@ -69,16 +72,40 @@ int letra_repetida(char letra) {
     
 }
 
+void regras() {
+    abertura();
+    printf("\n\n\t\t\t\tRegras:\n");
+    printf("\n\t\t\t\t(1) O objetivo do jogo é advinhar as letras da palavra secreta.");
+    printf("\n\t\t\t\t(2) A cada rodada uma letra é digitada.");
+    printf("\n\t\t\t\t(2) Em caso de acerto, a letra aparecerá em seu devido lugar.");
+    printf("\n\t\t\t\t(2) Em caso de erro, uma vida é perdida.");
+    printf("\n\t\t\t\t(3) Se errar 7 vezes você perde o jogo.");
+    printf("\n\t\t\t\t(4) A opção de jogo 1 seleciona uma palavra aleatória do banco de dados");
+    printf("\n\t\t\t\t(5) A opção de jogo 2 permite o usuário digitar uma palavra e uma dica para um amigo advinhar");
+}
+
+void creditos() {
+    abertura();
+    printf("\n\n\t\t\t\tCréditos:\n");
+    printf("\n\t\t\t\tJogo desenvolvido por Thiago Henrique Leite da Silva");
+    printf("\n\t\t\t\t3º Semestre de Ciência da Computação na Universidade Federal de São Paulo (UNIFESP)");
+    printf("\n\t\t\t\tÚltima modificação em 23/07/2020");
+    printf("\n\t\t\t\tinstagram.com/thiagoh.leite");
+    printf("\n\t\t\t\tgithub.com/thiago-henrique-leite");
+    printf("\n\n\t\t\t\tDeus é Fiel");
+}
+
 //OPÇÕES INICIAIS - MODO DE JOGO
 void modo_de_jogo() {
-    
-    printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
-    printf("\n\t\t\t\t  Escolha seu modo de jogo: \n");
+    abertura();
+    printf("\n\n\t\t\t\t  Escolha seu modo de jogo: \n");
     printf("\n\t\t\t\t  <1> Jogar com uma palavra aleatória");
     printf("\n\t\t\t\t  <2> Digitar uma palavra e dica para um(a) amigo(a) adivinhar");
     
     printf("\n\n\t\t\t\t  Insira a opção desejada <1 ou 2> e pressione <enter>: ");
-    scanf("%d", &modoJogo);
+    scanf(" %c", &modoJogo);
+    if(modoJogo != '1' && modoJogo != '2')
+        modo_de_jogo();
 }
 
 //ESCOLHA DA PALAVRA, SE SERÁ ALEATÓRIA OU DIGITADA
@@ -86,7 +113,7 @@ void escolha_da_palavra() {
     
     abertura();
     
-    if(modoJogo == 2) {
+    if(modoJogo == '2') {
         printf("\n\t  Observação: Omitir Acentos.\n");
         printf("\n\t  Digite a palavra escolhida e pressione <enter>: ");
         scanf(" %[^\n]s", palavra_digitada);
@@ -136,6 +163,36 @@ void abertura() {
     
 }
 
+int tela_inicial() {
+    char resp;
+    abertura();
+    printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
+    printf("\n\t\t\t\t\t\t\t <1> INÍCIO");
+    printf("\n\t\t\t\t\t\t\t <2> REGRAS");
+    printf("\n\t\t\t\t\t\t\t <3> CRÉDITOS");
+    printf("\n\n\n\t\t\t\t  Insira a opção desejada <1, 2 ou 3> e pressione <enter>: ");
+    scanf(" %c", &inicio);
+    
+    if(inicio=='1') return 1;
+    
+    else if(inicio=='2') {
+        regras();
+        printf("\n\n\t\t\t\t>>>> Digite qualquer caracter e pressione <enter> para voltar a tela inicial <<<<\n\t\t\t\t");
+        scanf(" %c", &resp);
+        tela_inicial();
+    }
+    
+    else if(inicio=='3') {
+        creditos();
+        printf("\n\n\t\t\t\t>>>> Digite qualquer caracter e pressione <enter> para voltar a tela inicial <<<<\n\t\t\t\t");
+        scanf(" %c", &resp);
+        tela_inicial();
+    }
+    
+    else tela_inicial();
+    
+}
+
 //INICIA A PALAVRA COM ESPAÇOS VAZIOS
 void inicia_palavra() {
     
@@ -177,7 +234,7 @@ void iniciaVetor() {
 //ATUALIZA O CONTADOR DE TENTATIVAS 
 void atualiza_contador() {
     
-    printf("\n\t  Tentativas Restantes = %d\n", cont);
+    printf("\n\t  Vidas Restantes = %d\n", cont);
     
 }
 
@@ -311,6 +368,7 @@ int main() {
     do {
         inicia_variaveis();
         abertura();
+        tela_inicial();
         modo_de_jogo();
         escolha_da_palavra();
         inicia_palavra();
