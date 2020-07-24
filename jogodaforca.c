@@ -1,12 +1,13 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
 //CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
+//Última Atualização 23/07/2020
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #define maxtam 50 //Tamanho máximo de uma palavra
 
-//CABEÇALHO DE FUNÇÕES
+//CABEÇALHO DE FUNÇÕES <jogodaforca.h>
 void inicia_variaveis();
 int letra_repetida(char);
 void modo_de_jogo();
@@ -26,7 +27,7 @@ int terminou();
 void jogo_da_forca();
 void resultado();
 
-//******************************************************************VÁRIÁVEIS GLOBAIS******************************************************************
+//******************************************************************VÁRIÁVEIS GLOBAIS***************************************************************************************
 
 char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], c; 
 int num_chutes, max_chutes, indice, certas, encontrou, indice_dica, tam_palavra, cont, erros, modoJogo, quant_letras;
@@ -47,49 +48,62 @@ char bancodePalavras[100][maxtam] =
         "Santos", "Barcelona", "Juventus", "Figueirense", "Zenit", "Penapolense", "Liverpool", "Chelsea", "Independiente", "Cruzeiro"                    //Times de Futebol
     };
     
-//****************************************************************************************************************************************************
-
+//***************************************************************************************************************************************************************************
+    
 //INICIALIZA AS VARIÁVEIS COM OS DEVIDOS VALORES
 void inicia_variaveis() {
+    
     num_chutes=0; indice=0; certas=0; encontrou=0; erros=0; 
-    modoJogo=0; indice_dica=0; tam_palavra=0; cont=7; max_chutes=7, quant_letras=0;  
+    modoJogo=0; indice_dica=0; tam_palavra=0; cont=7; max_chutes=7, quant_letras=0; 
+    
 }
 
 //VERIFICA SE A LETRA NÃO É REPETIDA
 int letra_repetida(char letra) {
+    
     for(int i=0; i<num_chutes; i++)
         if(letra == letras_tentadas[i]) 
             return 0;
+            
     return 1;
+    
 }
 
 //OPÇÕES INICIAIS - MODO DE JOGO
 void modo_de_jogo() {
-    printf("\n\t  BEM-VINDO(A)!\n");
-    printf("\n\t  Digite <1> para jogar com uma palavra aleatória");
-    printf("\n\t  Digite <2> para entrar com uma palavra e jogar com um amigo");
-    printf("\n\n\t  Insira a opção desejada e pressione <enter>: ");
+    
+    printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
+    printf("\n\t\t\t\t  Escolha seu modo de jogo: \n");
+    printf("\n\t\t\t\t  <1> Jogar com uma palavra aleatória");
+    printf("\n\t\t\t\t  <2> Digitar uma palavra e dica para um(a) amigo(a) adivinhar");
+    
+    printf("\n\n\t\t\t\t  Insira a opção desejada <1 ou 2> e pressione <enter>: ");
     scanf("%d", &modoJogo);
 }
 
 //ESCOLHA DA PALAVRA, SE SERÁ ALEATÓRIA OU DIGITADA
 void escolha_da_palavra() {
+    
     abertura();
+    
     if(modoJogo == 2) {
-        printf("\n\t  Observação: Não inserir acentos e separar palavras compostas com um traço < - > Não utilizar espaços.\n");
+        printf("\n\t  Observação: Omitir Acentos.\n");
         printf("\n\t  Digite a palavra escolhida e pressione <enter>: ");
-        scanf("%s", palavra_digitada);
+        scanf(" %[^\n]s", palavra_digitada);
+        
         strcpy(palavra_sorteada, palavra_digitada);
         tam_palavra = strlen(palavra_sorteada);
         quant_letras = tam_palavra;
+        
         printf("\n\t  Digite uma dica para esta palavra e pressione <enter>: ");
-        scanf("%s", dica);
+        scanf(" %[^\n]s", dica);
     }
     else sorteiaPalavra();
 }
 
 //SORTEIA UMA PALAVRA DO BANCO DE PALAVRAS E DETERMINA A DICA PARA ESTA PALAVRA
 void sorteiaPalavra() {
+    
     int indice_palavra;
     
     //sorteia um número aleatório entre 10 e 99
@@ -105,10 +119,12 @@ void sorteiaPalavra() {
     tam_palavra = strlen(palavra_sorteada);
     quant_letras = tam_palavra;
     strcpy(dica, bancodePalavras[indice_dica]);
+    
 }
 
 //ABERTURA DO JOGO
 void abertura() {
+    
     system("clear");
     printf("\n\t        _   ______   ______   ______      _____    _______     _____   ______   ______   ______   _______  "); 
     printf("\n\t       | | |  __  | |  ____| |  __  |    |  __ |  |  ___  |   |  ___| |  __  | |  __  | |  ____| |  ___  | ");
@@ -117,65 +133,83 @@ void abertura() {
     printf("\n\t  | |__| | | |__| | | |__| | | |__| |    | |__| | | |   | |   | |     | |__| | | | | |  | |____  | |   | | ");
     printf("\n\t  |______| |______| |______| |______|    |_____|  |_|   |_|   |_|     |______| |_|  |_| |______| |_|   |_| ");
     printf("\n\n");
+    
 }
 
 //INICIA A PALAVRA COM ESPAÇOS VAZIOS
 void inicia_palavra() {
+    
     for(int i=0; i<tam_palavra; i++) {
-        if(palavra_sorteada[i] == '-') {
-            chutes[i] = '-';
+        if(palavra_sorteada[i] == '-' || palavra_sorteada[i] == ' ') {
             certas++;
             quant_letras--;
+            if(palavra_sorteada[i] == '-')
+                chutes[i] = '-';
         }
-        else chutes[i] = ' ';
+        else chutes[i] = '_';
     }
+    
 }
 
 //IMPRIME ESPAÇOS DA PALAVRA A SEREM PREENCHIDOS
 void imprime_palavra() {
+    
     printf("\n\n\t  PALAVRA: ");
     for(int i=0; i<tam_palavra; i++) 
-            if(chutes[i] == ' ')
-                printf(" __ ");
-            else printf("  %c ", chutes[i]);
+            if(chutes[i] == '_')
+                printf(" __");
+            else if(chutes[i] == '-')
+                printf(" - ");
+            else printf("  %c", chutes[i]);
     printf("  (%d LETRAS)\n", quant_letras);
     printf("\n\t  Dica: %s\n", dica);
     printf("\n\t  *********************************************************************************************************\n");
+    
 }
 
 //INICIA VETOR COM AS LETRAS TENTADAS
 void iniciaVetor() {
+    
     letras_tentadas = (char*)malloc((tam_palavra+max_chutes) * sizeof(char));
+    
 }
 
 //ATUALIZA O CONTADOR DE TENTATIVAS 
 void atualiza_contador() {
+    
     printf("\n\t  Tentativas Restantes = %d\n", cont);
+    
 }
 
 //LÊ UMA NOVA LETRA
 void le_novaletra() {
+    
     printf("\t  Digite '#' a qualquer momento para abandonar a partida!\n");
     printf("\t  Digite uma letra e pressione <enter>: ");
     scanf(" %c", &c);
+    
     if(c != '#') {
         letras_tentadas[indice] = c;
         indice++;
     }
+    
 }
 
 //IMPPRIME LETRAS JÁ TENTADAS
 void imprime_letrastentadas() {
+    
     if(indice != 0) {
             printf("\n\t  Letras Tentadas: ");
             for(int i=0; i<indice; i++) 
                 printf("%c / ", letras_tentadas[i]);
             printf("\n");
         }
+        
 }
 
 //VERIFICA SE A LETRA INSERIDA ESTÁ NA PALAVRA
 void verifica_novaletra() {
+    
     encontrou=0;
     if(c!='-')
     if(letra_repetida(c) == 1) 
@@ -185,19 +219,23 @@ void verifica_novaletra() {
                     certas++;
                     encontrou=1;
                 }
+                
 }
 
 //ATUALIZA O CONTADOR, QUANTIDADE DE ERROS E NÚMERO DE CHUTES
 void atualiza_infos() {
+    
     if(!encontrou && c != '#') {
         cont--;
         erros++;
     }
     else num_chutes++;
+    
 }
 
 //DESENHA A FORCA
 void desenhaforca() {
+    
     printf("\n");
 	printf("\t      _______       \n");
 	printf("\t     |/      |      \n");
@@ -209,12 +247,14 @@ void desenhaforca() {
 	printf("\t    _|___           \n");
 	printf("\n");
 	
+	
 }
-
 
 //VERIFICA SE O JOGO TERMINOU
 int terminou() {
+    
     return(certas == tam_palavra || cont <= 0 || c == '#');
+    
 }
 
 //O JOGO DA FORCA EM SI
@@ -236,6 +276,7 @@ void jogo_da_forca() {
 
 //IMPRIME RESULTADO
 void resultado() {
+    
     if(cont <= 0 || c == '#') {
         printf("\n\t  INFELIZMENTE VOCÊ PERDEU, TENTE NOVAMENTE! A PALAVRA ERA --> %s <--", palavra_sorteada);
         printf("\n\t                                      __       ");
@@ -259,7 +300,9 @@ void resultado() {
         printf("\n\t       |_____________|");
         printf("\n");
     }
+    
     free(letras_tentadas);
+    
 }
 
 int main() {
@@ -286,7 +329,6 @@ int main() {
         
     } while(toupper(reiniciar) =='S' && c != '#');
     
-    printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\t\t\t\t\t\t\tThiago Henrique\n");
+    printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\n");
+    
 }
-
-      
