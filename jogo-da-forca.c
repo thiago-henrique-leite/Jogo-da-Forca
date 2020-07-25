@@ -78,20 +78,27 @@ int letra_repetida(char letra) {
 
 //REGRAS DE COMO JOGAR
 void comoJogar() {
+    char resp;
     abertura();
     printf("\n\n\t\tComo Jogar:\n");
-    printf("\n\t(1) O jogador tem que acertar qual é a palavra proposta, tendo como dica o número de letras e o tema ligado à palavra.");
+    printf("\n\t(1) O jogador tem que acertar qual é a palavra proposta, tendo como dica o tema ligado à palavra.");
     printf("\n\t(2) A cada rodada o jogador digita uma letra.");
     printf("\n\t(3) A cada letra certa, será revelado em que lugar ela se encontra na palavra secreta.");
     printf("\n\t(4) A cada letra errada, é desenhada uma parte do corpo do enforcado e perde-se uma vida.");
     printf("\n\t(5) O jogo termina se o jogador perder as 7 vidas ou completar a palavra proposta.");
-    printf("\n\t(6) O modo de jogo <1> seleciona uma palavra aleatória do banco de dados e dá uma dica para o jogador tentar acertar.");
+    printf("\n\t(6) O modo de jogo <1> seleciona uma palavra aleatória do jogo e dá uma dica para o jogador tentar acertar.");
     printf("\n\t(7) O modo de jogo <2> permite o usuário digitar uma palavra e uma dica para um amigo tentar advinhar.");
-    printf("\n\t(8) Omitir os acentos na hora da digitação das palavras.");
+    printf("\n\t(8) Omitir os acentos na hora da digitação das palavras.");                     
+    printf("\n\n\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESSIONE <ENTER> PARA VOLTAR A TELA INICIAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\t");
+    fflush(stdin);
+    while(resp != 10) 
+        resp = getchar();
+    tela_inicial();
 }
 
 //CRÉDITOS DO JOGO
 void creditos() {
+    int resp;
     abertura();
     printf("\n\n\t\tCréditos:\n");
     printf("\n\tJogo desenvolvido por Thiago Henrique Leite da Silva");
@@ -100,18 +107,25 @@ void creditos() {
     printf("\n\tinstagram.com/thiagoh.leite");
     printf("\n\tgithub.com/thiago-henrique-leite");
     printf("\n\tAgradecimento especial a Jamylle Cristina que ajudou na diagramação do jogo.");
-    printf("\n\tDeus é Fiel");
+    printf("\n\n\tDeus é Fiel");
+    printf("\n\n\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESSIONE <ENTER> PARA VOLTAR A TELA INICIAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\t");
+    fflush(stdin);
+    while(resp != 10) 
+        resp = getchar();
+    tela_inicial();
 }
 
 //OPÇÕES INICIAIS - MODO DE JOGO
 void modo_de_jogo() {
+    char lixo;
     abertura();
     printf("\n\n\t\t\t\t\t\t\t[MODO DE JOGO]");
     printf("\n\n\t\t\t\t\t\t      <1> SINGLE-PLAYER");
     printf("\n\t\t\t\t\t\t      <2> MULTIPLAYER");
     printf("\n\t\t\t\t\t\t      <3> VOLTAR");
     printf("\n\n\t\t\t\t Insira a opção desejada <1, 2 ou 3> e pressione <enter>: ");
-    scanf(" %c", &modoJogo);
+    scanf("%c", &modoJogo);
+    scanf("%c", &lixo);
     if(modoJogo != '1' && modoJogo != '2' && modoJogo != '3')
         modo_de_jogo();
     else if(modoJogo == '3')
@@ -176,7 +190,7 @@ void abertura() {
 
 //TELA DE BOAS VINDAS
 int tela_inicial() {
-    char resp;
+    char lixo;
     abertura();
     printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
     printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANÇAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n");
@@ -185,23 +199,17 @@ int tela_inicial() {
     printf("\n\t\t\t\t\t\t\t <3> CRÉDITOS");
     printf("\n\t\t\t\t\t\t\t <4> SAIR");
     printf("\n\n\n\t\t\t\t  Insira a opção desejada <1, 2, 3 ou 4> e pressione <enter>: ");
-    scanf(" %c", &inicio);
+    scanf("%c", &inicio);
+    scanf("%c", &lixo);
     
-    if(inicio=='1') modo_de_jogo();
+    if(inicio=='1') 
+        modo_de_jogo();
     
-    else if(inicio=='2') {
+    else if(inicio=='2') 
         comoJogar();
-        printf("\n\n\t>>>> Digite qualquer caracter e pressione <enter> para voltar a tela inicial <<<<\n\t");
-        scanf(" %c", &resp);
-        tela_inicial();
-    }
     
-    else if(inicio=='3') {
+    else if(inicio=='3') 
         creditos();
-        printf("\n\n\t>>>> Digite qualquer caracter e pressione <enter> para voltar a tela inicial <<<<\n\t");
-        scanf(" %c", &resp);
-        tela_inicial();
-    }
     
     else if(inicio=='4')
         return 0;    
@@ -254,15 +262,26 @@ void atualiza_contador() {
 //LÊ UMA NOVA LETRA
 void le_novaletra() {
     
-    printf("\t  Digite uma letra e pressione <enter>: ");
-    scanf(" %c", &c);
+    char lixo;
+    int auxiliar;
     
-    soma++;
+    printf("\t  Digite uma letra e pressione <enter>: ");
+    c = getchar();
+    printf("\t\t\t\t\t\t");
+    scanf("%c", &lixo);
+    
+    auxiliar = c; //Tratamento caso o usuário insira a letra depois de pressionar enter
+    if(auxiliar == 10) 
+        if(lixo != 10) {
+            c = lixo;
+            scanf("%c", &lixo);
+        }
   
-    if(c != '#') {
+    if(c != '#' && c != 10) {
         verifica_novaletra();
         letras_tentadas[indice] = c;
         indice++;
+        soma++;
     }
     
 }
@@ -296,11 +315,12 @@ void verifica_novaletra() {
 //ATUALIZA O CONTADOR, QUANTIDADE DE ERROS E NÚMERO DE CHUTES
 void atualiza_infos() {
     
-    if(!encontrou && c != '#') {
-        cont--;
-        erros++;
-    }
-    else num_chutes++;
+    if(c != 10)
+        if(!encontrou && c != '#') {
+            cont--;
+            erros++;
+        }
+        else num_chutes++;
     
 }
 
@@ -328,7 +348,7 @@ int terminou() {
     
 }
 
-//O JOGO DA FORCA EM SI
+//FUNÇÃO DO JOGO EM SI
 void jogo_da_forca() {
     
     do {
@@ -344,7 +364,7 @@ void jogo_da_forca() {
     
 }
 
-//IMPRIME RESULTADO
+//IMPRIME O RESULTADO DA PARTIDA
 void resultado() {
     
     if(cont <= 0 || c == '#') {
@@ -375,9 +395,11 @@ void resultado() {
 
 //VERIFICA SE O USUÁRIO QUER JOGAR DENOVO
 int jogar_denovo() {
+    char lixo;
     if(c != '#') {
             printf("\tQuer jogar denovo? <S> Sim <N> Não: ");
-            scanf(" %c", &reiniciar);
+            scanf("%c", &reiniciar);
+            scanf("%c", &lixo);
             if(toupper(reiniciar) != 'S' && toupper(reiniciar) != 'N') 
                 jogar_denovo();
             else return 1;
@@ -413,6 +435,6 @@ int main() {
         
     } while(toupper(reiniciar) =='S' && c != '#' && inicio != '4');
     
-    printf("\n\n\t\t\t\t\t   OBRIGADO POR JOGAR, VOLTE SEMPRE!\n");
+    printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\n");
     
 }
