@@ -107,7 +107,7 @@ void creditos() {
     printf("\n\n\t\tCréditos:\n");
     printf("\n\tJogo desenvolvido por Thiago Henrique Leite da Silva");
     printf("\n\t3º Semestre de Ciência da Computação na Universidade Federal de São Paulo (UNIFESP)");
-    printf("\n\tÚltima modificação em 23/07/2020");
+    printf("\n\tÚltima modificação em 26/07/2020");
     printf("\n\tinstagram.com/thiagoh.leite");
     printf("\n\tgithub.com/thiago-henrique-leite");
     printf("\n\tAgradecimento especial a Jamylle Cristina que ajudou na diagramação do jogo.");
