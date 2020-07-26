@@ -1,11 +1,14 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
 //CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
-//Ultima Atualização em 25/julho/2020
+//Ultima Atualização em 26/julho/2020
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
+#include <conio.h>
 #define maxtam 50 //Tamanho máximo de uma palavra
+#define limpaTela system("clear") //Alguns compiladores só lêem system("cls")
 
 //CABEÇALHO DE FUNÇÕES <jogodaforca.h>
 void inicia_variaveis();
@@ -181,7 +184,7 @@ void sorteiaPalavra() {
 //ABERTURA DO JOGO
 void abertura() {
     
-    system("clear");
+    limpaTela;
     printf("\n\t\t          __  ______  ______  ______    ____    ______    _____  ______  ____    ______  ______        "); 
     printf("\n\t\t         / / / __  / / ____/ / __  /   / __ \\  / _   /   / ___/ / __  / / __ \\  / ____/ / _   /        ");
     printf("\n\t\t    __  / / / / / / / / __  / / / /   / / / / / /_/ /   / /_   / / / / / /_/ / / /     / /_/ /     ");
@@ -195,6 +198,7 @@ void abertura() {
 int tela_inicial() {
     char lixo;
     abertura();
+    inicio = 0;
     printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
     printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANÇAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n\n\n");
     printf("\t\t\t\t\t\t  ----------------------------\n");
@@ -411,10 +415,6 @@ int jogar_denovo() {
                 reiniciar = lixo;
                 scanf("%c", &lixo);
             }
-            else if(lixo != 10)
-                reiniciar = 'N';
-            if(toupper(reiniciar) == 'S')
-                tela_inicial();
     }
 }
 
@@ -426,6 +426,9 @@ int sair() {
 }
 
 int main() {
+    
+    setlocale(LC_ALL, "Portuguese");
+    system("color 70");
     
     do {
         inicia_variaveis();
