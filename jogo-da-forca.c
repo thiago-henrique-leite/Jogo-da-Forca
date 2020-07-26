@@ -34,8 +34,9 @@ int sair();
 
 //******************************************************************VÁRIÁVEIS GLOBAIS***************************************************************************************
 
-char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], inicio, modoJogo, reiniciar, c; 
-int num_chutes, max_chutes, indice, certas, encontrou, indice_dica, tam_palavra, cont, erros, quant_letras, soma;
+char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], reiniciar, c; 
+int num_chutes, max_chutes, indice, certas, encontrou, indice_dica;
+int tam_palavra, cont, erros, quant_letras, soma, inicio, modoJogo;
 char *letras_tentadas;
  
 //BANCO DE PALAVRAS
@@ -82,7 +83,7 @@ void comoJogar() {
     abertura();
     printf("\n\n\t\tComo Jogar:\n");
     printf("\n\t(1) O jogador tem que acertar qual é a palavra proposta, tendo como dica o tema ligado à palavra.");
-    printf("\n\t(2) A cada rodada o jogador digita uma letra.");
+    printf("\n\t(2) A cada rodada o jogador digita uma letra por vez.");
     printf("\n\t(3) A cada letra certa, será revelado em que lugar ela se encontra na palavra secreta.");
     printf("\n\t(4) A cada letra errada, é desenhada uma parte do corpo do enforcado e perde-se uma vida.");
     printf("\n\t(5) O jogo termina se o jogador perder as 7 vidas ou completar a palavra proposta.");
@@ -119,16 +120,19 @@ void creditos() {
 void modo_de_jogo() {
     char lixo;
     abertura();
-    printf("\n\n\t\t\t\t\t\t\t[MODO DE JOGO]");
-    printf("\n\n\t\t\t\t\t\t      <1> SINGLE-PLAYER");
-    printf("\n\t\t\t\t\t\t      <2> MULTIPLAYER");
-    printf("\n\t\t\t\t\t\t      <3> VOLTAR");
-    printf("\n\n\t\t\t\t Insira a opção desejada <1, 2 ou 3> e pressione <enter>: ");
-    scanf("%c", &modoJogo);
+    printf("\n\t\t\t\t\t\t  ----------------------------\n");
+    printf("\t\t\t\t\t\t  |       MODO DE JOGO       |\n");
+    printf("\t\t\t\t\t\t  ----------------------------\n");
+    printf("\t\t\t\t\t\t  |     <1> SINGLE-PLAYER    |\n");
+    printf("\t\t\t\t\t\t  |     <2> MULTIPLAYER      |\n");
+    printf("\t\t\t\t\t\t  |     <3> VOLTAR           |\n");
+    printf("\t\t\t\t\t\t  ----------------------------\n");
+    printf("\n\t\t\t\t\t Digite a opção desejada e pressione <enter>: ");
+    scanf("%d", &modoJogo);
     scanf("%c", &lixo);
-    if(modoJogo != '1' && modoJogo != '2' && modoJogo != '3')
+    if(modoJogo != 1 && modoJogo != 2 && modoJogo != 3)
         modo_de_jogo();
-    else if(modoJogo == '3')
+    else if(modoJogo == 3)
         tela_inicial();
 }
 
@@ -137,7 +141,7 @@ void escolha_da_palavra() {
     
     abertura();
     
-    if(modoJogo == '2') {
+    if(modoJogo == 2) {
         printf("\n\tNo Modo MULTIPLAYER é você quem escreve a palavra e uma dica relacionada a ela para seu amigo advinhar!\n");
         printf("\n\tObservação: Omitir os acentos da palavra escolhida.\n");
         printf("\n\t\tDigite a palavra e pressione <enter>: ");
@@ -178,12 +182,11 @@ void sorteiaPalavra() {
 void abertura() {
     
     system("clear");
-    printf("\n\t        _   ______   ______   ______      _____    _______     _____   ______   ______   ______   _______  "); 
-    printf("\n\t       | | |  __  | |  ____| |  __  |    |  __ |  |  ___  |   |  ___| |  __  | |  __  | |  ____| |  ___  | ");
-    printf("\n\t       | | | |  | | | | ___  | |  | |    | |  | | | |___| |   | |__   | |  | | | |__| | | |      | |___| | ");
-    printf("\n\t   _   | | | |  | | | ||__ | | |  | |    | |  | | |  ___  |   |  __|  | |  | | |  __ _| | |      |  ___  | ");
-    printf("\n\t  | |__| | | |__| | | |__| | | |__| |    | |__| | | |   | |   | |     | |__| | | | | |  | |____  | |   | | ");
-    printf("\n\t  |______| |______| |______| |______|    |_____|  |_|   |_|   |_|     |______| |_|  |_| |______| |_|   |_| ");
+    printf("\n\t\t          __  ______  ______  ______    ____    ______    _____  ______  ____    ______  ______        "); 
+    printf("\n\t\t         / / / __  / / ____/ / __  /   / __ \\  / _   /   / ___/ / __  / / __ \\  / ____/ / _   /        ");
+    printf("\n\t\t    __  / / / / / / / / __  / / / /   / / / / / /_/ /   / /_   / / / / / /_/ / / /     / /_/ /     ");
+    printf("\n\t\t   / /_/ / / /_/ / / /_/ / / /_/ /   / /_/ / / __  /   / __/  / /_/ / / // /  / /___  / __  /      ");
+    printf("\n\t\t  /_____/ /_____/ /_____/ /_____/   /_____/ /_/ /_/   /_/    /_____/ /_/ /_/ /_____/ /_/ /_/        ");
     printf("\n\n");
     
 }
@@ -193,25 +196,29 @@ int tela_inicial() {
     char lixo;
     abertura();
     printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
-    printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANÇAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n");
-    printf("\n\n\t\t\t\t\t\t\t <1> INÍCIO");
-    printf("\n\t\t\t\t\t\t\t <2> COMO JOGAR");
-    printf("\n\t\t\t\t\t\t\t <3> CRÉDITOS");
-    printf("\n\t\t\t\t\t\t\t <4> SAIR");
-    printf("\n\n\n\t\t\t\t  Insira a opção desejada <1, 2, 3 ou 4> e pressione <enter>: ");
-    scanf("%c", &inicio);
+    printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANÇAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n\n\n");
+    printf("\t\t\t\t\t\t  ----------------------------\n");
+    printf("\t\t\t\t\t\t  |      MENU PRINCIPAL      |\n");
+    printf("\t\t\t\t\t\t  ----------------------------\n");
+    printf("\t\t\t\t\t\t  |      1. NOVO JOGO        |\n");
+    printf("\t\t\t\t\t\t  |      2. COMO JOGAR       |\n");
+    printf("\t\t\t\t\t\t  |      3. CRÉDITOS         |\n");
+    printf("\t\t\t\t\t\t  |      4. SAIR             |\n");
+    printf("\t\t\t\t\t\t  ----------------------------\n");
+    printf("\n\t\t\t\t\t Digite a opção desejada e pressione <enter>: ");
+    scanf("%d", &inicio);
     scanf("%c", &lixo);
     
-    if(inicio=='1') 
+    if(inicio==1) 
         modo_de_jogo();
     
-    else if(inicio=='2') 
+    else if(inicio==2) 
         comoJogar();
     
-    else if(inicio=='3') 
+    else if(inicio==3) 
         creditos();
     
-    else if(inicio=='4')
+    else if(inicio==4)
         return 0;    
         
     else tela_inicial();
@@ -267,7 +274,6 @@ void le_novaletra() {
     
     printf("\t  Digite uma letra e pressione <enter>: ");
     c = getchar();
-    printf("\t\t\t\t\t\t");
     scanf("%c", &lixo);
     
     auxiliar = c; //Tratamento caso o usuário insira a letra depois de pressionar enter
@@ -396,19 +402,25 @@ void resultado() {
 //VERIFICA SE O USUÁRIO QUER JOGAR DENOVO
 int jogar_denovo() {
     char lixo;
+    int auxiliar;
     if(c != '#') {
-            printf("\tQuer jogar denovo? <S> Sim <N> Não: ");
+            printf("\tQuer jogar denovo? <S> SIM <N> NÃO -> ");
             scanf("%c", &reiniciar);
             scanf("%c", &lixo);
-            if(toupper(reiniciar) != 'S' && toupper(reiniciar) != 'N') 
-                jogar_denovo();
-            else return 1;
+            if(toupper(lixo) == toupper('s')) {
+                reiniciar = lixo;
+                scanf("%c", &lixo);
+            }
+            else if(lixo != 10)
+                reiniciar = 'N';
+            if(toupper(reiniciar) == 'S')
+                tela_inicial();
     }
 }
 
 //VERIFICA SE O USUÁRIO QUER SAIR DO JOGO
 int sair() {
-    if(inicio=='4')
+    if(inicio==4)
         return 1;
     else return 0;
 }
@@ -433,7 +445,7 @@ int main() {
             free(letras_tentadas);
         }
         
-    } while(toupper(reiniciar) =='S' && c != '#' && inicio != '4');
+    } while(toupper(reiniciar) == 'S' && c != '#' && inicio != 4);
     
     printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\n");
     
