@@ -1,6 +1,6 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
 //CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
-//Ultima Atualização em 24/julho/2020
+//Ultima Atualização em 25/julho/2020
 
 #include <stdio.h>
 #include <stdlib.h>
