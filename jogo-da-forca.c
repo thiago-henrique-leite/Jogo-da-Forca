@@ -62,10 +62,8 @@ char bancodePalavras[100][maxtam] =
     
 //INICIALIZA AS VARIÁVEIS COM OS DEVIDOS VALORES
 void inicia_variaveis() {
-    
     num_chutes=0; indice=0; certas=0; encontrou=0; erros=0, soma=0; 
     modoJogo=0; indice_dica=0; tam_palavra=0; cont=7; max_chutes=7, quant_letras=0; 
-    
 }
 
 //VERIFICA SE A LETRA NÃO É REPETIDA
@@ -78,7 +76,6 @@ int letra_repetida(char letra) {
             
     if(aux==0) return 1;
     else return 0;
-    
 }
 
 //REGRAS DE COMO JOGAR
@@ -179,7 +176,6 @@ void sorteiaPalavra() {
     tam_palavra = strlen(palavra_sorteada);
     quant_letras = tam_palavra;
     strcpy(dica, bancodePalavras[indice_dica]);
-    
 }
 
 //ABERTURA DO JOGO
@@ -191,8 +187,7 @@ void abertura() {
     printf("\n\t\t    __  / / / / / / / / __  / / / /   / / / / / /_/ /   / /_   / / / / / /_/ / / /     / /_/ /     ");
     printf("\n\t\t   / /_/ / / /_/ / / /_/ / / /_/ /   / /_/ / / __  /   / __/  / /_/ / / // /  / /___  / __  /      ");
     printf("\n\t\t  /_____/ /_____/ /_____/ /_____/   /_____/ /_/ /_/   /_/    /_____/ /_/ /_/ /_____/ /_/ /_/        ");
-    printf("\n\n");
-    
+    printf("\n\n");    
 }
 
 //TELA DE BOAS VINDAS
@@ -356,9 +351,7 @@ void desenhaforca() {
 
 //VERIFICA SE O JOGO TERMINOU
 int terminou() {
-    
     return(certas == tam_palavra || cont <= 0 || c == '#');
-    
 }
 
 //FUNÇÃO DO JOGO EM SI
