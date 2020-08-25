@@ -1,6 +1,7 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
+
 //CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
-//Ultima Atualização em 26/julho/2020
+//Ultima Atualização em 25/agosto/2020
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,16 +11,16 @@
 #define maxtam 50 //Tamanho máximo de uma palavra
 #define limpaTela system("clear") //Alguns compiladores só lêem system("cls")
 
-//CABEÇALHO DE FUNÇÕES <jogodaforca.h>
+//CABEÇALHO DE FUNÇÕES 
 void inicia_variaveis();
-int letra_repetida(char);
+int  letra_repetida(char);
 void comoJogar();
 void creditos();
 void modo_de_jogo();
 void escolha_da_palavra();
 void sorteiaPalavra();
 void abertura();
-int tela_inicial();
+int  tela_inicial();
 void inicia_palavra();
 void imprime_palavra();
 void iniciaVetor();
@@ -29,11 +30,11 @@ void imprime_letrastentadas();
 void verifica_novaletra();
 void atualiza_infos();
 void desenhaforca();
-int terminou();
+int  terminou();
 void jogo_da_forca();
 void resultado();
-int jogar_denovo();
-int sair();
+int  jogar_denovo();
+int  sair();
 
 //******************************************************************VÁRIÁVEIS GLOBAIS***************************************************************************************
 
@@ -107,7 +108,7 @@ void creditos() {
     printf("\n\n\t\tCréditos:\n");
     printf("\n\tJogo desenvolvido por Thiago Henrique Leite da Silva");
     printf("\n\t3º Semestre de Ciência da Computação na Universidade Federal de São Paulo (UNIFESP)");
-    printf("\n\tÚltima modificação em 26/07/2020");
+    printf("\n\tÚltima modificação em 25/08/2020");
     printf("\n\tinstagram.com/thiagoh.leite");
     printf("\n\tgithub.com/thiago-henrique-leite");
     printf("\n\tAgradecimento especial a Jamylle Cristina que ajudou na diagramação do jogo.");
@@ -253,6 +254,8 @@ void imprime_palavra() {
                 printf(" __");
             else if(chutes[i] == '-')
                 printf(" - ");
+            else if(chutes[i] == ' ')
+                printf("   ");
             else printf("  %c", chutes[i]);
     printf("  (%d LETRAS)\n", quant_letras);
     printf("\n\t  Dica: %s\n", dica);
