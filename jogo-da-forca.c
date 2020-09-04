@@ -1,17 +1,16 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
-
-//CRÉDITOS - Função 'desenhaforca()' retirada de https://gist.github.com/mauricioaniche/5b0c7c543de0ca2d4e08 . Demais funções de autoria própria.
-//Ultima Atualização em 25/agosto/2020
+//Ultima Atualizacao em 04/setembro/2020
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
 #include <conio.h>
-#define maxtam 50 //Tamanho máximo de uma palavra
-#define limpaTela system("clear") //Alguns compiladores só lêem system("cls")
 
-//CABEÇALHO DE FUNÇÕES 
+#define maxtam 50 //Tamanho máximo de uma palavra
+#define limpaTela system("cls") 
+
+//CABECALHO DE FUNCOES 
 void inicia_variaveis();
 int  letra_repetida(char);
 void comoJogar();
@@ -38,15 +37,16 @@ int  sair();
 
 //******************************************************************VÁRIÁVEIS GLOBAIS***************************************************************************************
 
-char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam], reiniciar, c; 
+char palavra_sorteada[maxtam], chutes[maxtam], dica[maxtam], palavra_digitada[maxtam]; 
 int num_chutes, max_chutes, indice, certas, encontrou, indice_dica;
 int tam_palavra, cont, erros, quant_letras, soma, inicio, modoJogo;
 char *letras_tentadas;
+char reiniciar, c;
  
 //BANCO DE PALAVRAS
 char bancodePalavras[100][maxtam] = 
     {
-        "null", "Nome", "Cidade ou País", "Marca", "Objeto", "Profissão", "Animal", "Alimento", "Tem no Hospital", "Time de Futebol",                    //Dicas
+        "null", "Nome", "Cidade ou País", "Marca", "Objeto", "Profissao", "Animal", "Alimento", "Tem no Hospital", "Time de Futebol",                    //Dicas
         "Romario", "Alcione", "Marinalva", "Orivaldo", "Claudete", "Pietro", "Jamylle", "Bernardo", "Antonella", "Tobias",                               //Nomes
         "Madrid", "Egito", "Jacarei", "Africa", "Israel", "Singapura", "Bahamas", "Guatemala", "Honduras", "Indonesia",                                  //Cidades ou Países
         "Danone", "Havaianas", "Yamaha", "Lamborghini", "Porsche", "Samsung", "Gillette", "Diesel", "Oakley", "Uber",                                    //Marcas
@@ -62,11 +62,21 @@ char bancodePalavras[100][maxtam] =
     
 //INICIALIZA AS VARIÁVEIS COM OS DEVIDOS VALORES
 void inicia_variaveis() {
-    num_chutes=0; indice=0; certas=0; encontrou=0; erros=0, soma=0; 
-    modoJogo=0; indice_dica=0; tam_palavra=0; cont=7; max_chutes=7, quant_letras=0; 
+    quant_letras=0;
+    indice_dica=0;
+    tam_palavra=0;
+    max_chutes=7;
+    num_chutes=0; 
+    encontrou=0; 
+    modoJogo=0;
+    indice=0; 
+    certas=0; 
+    erros=0;
+    soma=0; 
+    cont=7;
 }
 
-//VERIFICA SE A LETRA NÃO É REPETIDA
+//VERIFICA SE A LETRA NaO e REPETIDA
 int letra_repetida(char letra) {
     int aux=0;
     
@@ -83,14 +93,14 @@ void comoJogar() {
     char resp;
     abertura();
     printf("\n\n\t\tComo Jogar:\n");
-    printf("\n\t(1) O jogador tem que acertar qual é a palavra proposta, tendo como dica o tema ligado à palavra.");
+    printf("\n\t(1) O jogador tem que acertar qual e a palavra proposta, tendo como dica o tema ligado a palavra.");
     printf("\n\t(2) A cada rodada o jogador digita uma letra por vez.");
     printf("\n\t(3) A cada letra certa, será revelado em que lugar ela se encontra na palavra secreta.");
-    printf("\n\t(4) A cada letra errada, é desenhada uma parte do corpo do enforcado e perde-se uma vida.");
+    printf("\n\t(4) A cada letra errada, e desenhada uma parte do corpo do enforcado e perde-se uma vida.");
     printf("\n\t(5) O jogo termina se o jogador perder as 7 vidas ou completar a palavra proposta.");
     printf("\n\t(6) O modo de jogo <1> seleciona uma palavra aleatória do jogo e dá uma dica para o jogador tentar acertar.");
     printf("\n\t(7) O modo de jogo <2> permite o usuário digitar uma palavra e uma dica para um amigo tentar advinhar.");
-    printf("\n\t(8) Omitir os acentos na hora da digitação das palavras.");                     
+    printf("\n\t(8) Omitir os acentos na hora da digitacao das palavras.");                     
     printf("\n\n\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESSIONE <ENTER> PARA VOLTAR A TELA INICIAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\t");
     fflush(stdin);
     while(resp != 10) 
@@ -98,18 +108,17 @@ void comoJogar() {
     tela_inicial();
 }
 
-//CRÉDITOS DO JOGO
+//CReDITOS DO JOGO
 void creditos() {
     int resp;
     abertura();
-    printf("\n\n\t\tCréditos:\n");
+    printf("\n\n\t\tCreditos:\n");
     printf("\n\tJogo desenvolvido por Thiago Henrique Leite da Silva");
-    printf("\n\t3º Semestre de Ciência da Computação na Universidade Federal de São Paulo (UNIFESP)");
-    printf("\n\tÚltima modificação em 25/08/2020");
+    printf("\n\t3º Semestre de Ciencia da Computacao na Universidade Federal de Sao Paulo (UNIFESP)");
+    printf("\n\tUltima modificacao em 04/09/2020");
     printf("\n\tinstagram.com/thiagoh.leite");
     printf("\n\tgithub.com/thiago-henrique-leite");
-    printf("\n\tAgradecimento especial a Jamylle Cristina que ajudou na diagramação do jogo.");
-    printf("\n\n\tDeus é Fiel");
+    printf("\n\n\tDeus e Fiel");
     printf("\n\n\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESSIONE <ENTER> PARA VOLTAR A TELA INICIAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\t");
     fflush(stdin);
     while(resp != 10) 
@@ -117,7 +126,7 @@ void creditos() {
     tela_inicial();
 }
 
-//OPÇÕES INICIAIS - MODO DE JOGO
+//OPcÕES INICIAIS - MODO DE JOGO
 void modo_de_jogo() {
     char lixo;
     abertura();
@@ -128,7 +137,7 @@ void modo_de_jogo() {
     printf("\t\t\t\t\t\t  |     <2> MULTIPLAYER      |\n");
     printf("\t\t\t\t\t\t  |     <3> VOLTAR           |\n");
     printf("\t\t\t\t\t\t  ----------------------------\n");
-    printf("\n\t\t\t\t\t Digite a opção desejada e pressione <enter>: ");
+    printf("\n\t\t\t\t\t Digite a opcao desejada e pressione <enter>: ");
     scanf("%d", &modoJogo);
     scanf("%c", &lixo);
     if(modoJogo != 1 && modoJogo != 2 && modoJogo != 3)
@@ -143,8 +152,8 @@ void escolha_da_palavra() {
     abertura();
     
     if(modoJogo == 2) {
-        printf("\n\tNo Modo MULTIPLAYER é você quem escreve a palavra e uma dica relacionada a ela para seu amigo advinhar!\n");
-        printf("\n\tObservação: Omitir os acentos da palavra escolhida.\n");
+        printf("\n\tNo Modo MULTIPLAYER e voce quem escreve a palavra e uma dica relacionada a ela para seu amigo advinhar!\n");
+        printf("\n\tObservacao: Omitir os acentos da palavra escolhida.\n");
         printf("\n\t\tDigite a palavra e pressione <enter>: ");
         scanf(" %[^\n]s", palavra_digitada);
         
@@ -163,13 +172,13 @@ void sorteiaPalavra() {
     
     int indice_palavra;
     
-    //sorteia um número aleatório entre 10 e 99
+    //sorteia um nUmero aleatório entre 10 e 99
     srand(time(NULL));
     indice_palavra = rand()%100;
         if(indice_palavra < 90)
             indice_palavra = indice_palavra+10;
 
-    //calcula o índice da dica da palavra sorteada (as dicas estão do índice 1 até o 9)
+    //calcula o índice da dica da palavra sorteada (as dicas estao do índice 1 ate o 9)
     indice_dica = indice_palavra/10;
     
     strcpy(palavra_sorteada, bancodePalavras[indice_palavra]);
@@ -196,16 +205,16 @@ int tela_inicial() {
     abertura();
     inicio = 0;
     printf("\n\n\t\t\t\t\t\t\t BEM-VINDO(A)!\n\n");
-    printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANÇAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n\n\n");
+    printf("\t\t\t ESTE JOGO TEM POR OBJETIVO AJUDAR CRIANCAS A ULTRAPASSAREM PROBLEMAS DE DISLEXIA\n\n\n");
     printf("\t\t\t\t\t\t  ----------------------------\n");
     printf("\t\t\t\t\t\t  |      MENU PRINCIPAL      |\n");
     printf("\t\t\t\t\t\t  ----------------------------\n");
     printf("\t\t\t\t\t\t  |      1. NOVO JOGO        |\n");
     printf("\t\t\t\t\t\t  |      2. COMO JOGAR       |\n");
-    printf("\t\t\t\t\t\t  |      3. CRÉDITOS         |\n");
+    printf("\t\t\t\t\t\t  |      3. CREDITOS         |\n");
     printf("\t\t\t\t\t\t  |      4. SAIR             |\n");
     printf("\t\t\t\t\t\t  ----------------------------\n");
-    printf("\n\t\t\t\t\t Digite a opção desejada e pressione <enter>: ");
+    printf("\n\t\t\t\t\t Digite a opcao desejada e pressione <enter>: ");
     scanf("%d", &inicio);
     scanf("%c", &lixo);
     
@@ -268,7 +277,7 @@ void atualiza_contador() {
     printf("\n\t  Vidas Restantes = %d\t\t\t\t    Digite '#' a qualquer momento para abandonar a partida!\n", cont);
 }
 
-//LÊ UMA NOVA LETRA
+//Le UMA NOVA LETRA
 void le_novaletra() {
     
     char lixo;
@@ -303,7 +312,6 @@ void imprime_letrastentadas() {
                 printf("%c / ", letras_tentadas[i]);
             printf("\n");
         }
-        
 }
 
 //VERIFICA SE A LETRA INSERIDA ESTÁ NA PALAVRA
@@ -317,10 +325,9 @@ void verifica_novaletra() {
                     certas++;
                     encontrou=1;
                 }
-                
 }
 
-//ATUALIZA O CONTADOR, QUANTIDADE DE ERROS E NÚMERO DE CHUTES
+//ATUALIZA O CONTADOR, QUANTIDADE DE ERROS E NUMERO DE CHUTES
 void atualiza_infos() {
     
     if(c != 10)
@@ -354,7 +361,7 @@ int terminou() {
     return(certas == tam_palavra || cont <= 0 || c == '#');
 }
 
-//FUNÇÃO DO JOGO EM SI
+//FUNcaO DO JOGO EM SI
 void jogo_da_forca() {
     
     do {
@@ -374,7 +381,7 @@ void jogo_da_forca() {
 void resultado() {
     
     if(cont <= 0 || c == '#') {
-        printf("\n\t\t    INFELIZMENTE VOCÊ PERDEU, TENTE NOVAMENTE! A PALAVRA ERA --> %s <--", palavra_sorteada);
+        printf("\n\t\t    INFELIZMENTE VOCE PERDEU, TENTE NOVAMENTE! A PALAVRA ERA --> %s <--", palavra_sorteada);
         printf("\n\t\t\t\t\t\t          __       ");
         printf("\n\t\t\t\t\t\t         |  |      ");
         printf("\n\t\t\t\t\t\t     ____|  |____  ");
@@ -386,7 +393,7 @@ void resultado() {
         printf("\n\n");
     } 
     else {
-        printf("\t\t\t\t\t\t  PARABÉNS, VOCÊ GANHOU!");
+        printf("\t\t\t\t\t\t  PARABENS, VOCE GANHOU!");
         printf("\n\t\t\t\t\t\t                __ ");
         printf("\n\t\t\t\t\t\t               |  |");
         printf("\n\t\t\t\t\t\t         ______|  |");
@@ -404,7 +411,7 @@ int jogar_denovo() {
     char lixo;
     int auxiliar;
     if(c != '#') {
-            printf("\tQuer jogar denovo? <S> SIM <N> NÃO -> ");
+            printf("\tQuer jogar denovo? <S> SIM <N> NAO -> ");
             scanf("%c", &reiniciar);
             scanf("%c", &lixo);
             if(toupper(lixo) == toupper('s')) {
@@ -424,7 +431,7 @@ int sair() {
 int main() {
     
     setlocale(LC_ALL, "Portuguese");
-    system("color 70");
+    system("color 47");
     
     do {
         inicia_variaveis();
@@ -446,6 +453,6 @@ int main() {
         
     } while(toupper(reiniciar) == 'S' && c != '#' && inicio != 4);
     
-    printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\n");
+    printf("\n\n\tOBRIGADO POR JOGAR, VOLTE SEMPRE!\n\n");
     
 }
