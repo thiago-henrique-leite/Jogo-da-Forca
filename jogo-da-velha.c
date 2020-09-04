@@ -1,11 +1,12 @@
 //JOGO DA VELHA - IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
-//Ultima Atualização em 24/julho/2020
+//Ultima Atualização em 04/setembro/2020
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int jogador, jogada, pos, fim;
 char jogo[9], reinicio;
+char player1[50], player2[50];
 
 void inicializa() {
     jogada=0;
@@ -15,8 +16,8 @@ void inicializa() {
 }
 
 void display(char jogo[]) {
-    system("clear");
-    printf("\n\t|*******JOGO DA VELHA*******|\n"); 
+    system("cls");
+    printf("\n\n\t#*******JOGO DA VELHA*******#\n"); 
     printf("\n\t  1 | 2 | 3  \t  %c | %c | %c", jogo[0], jogo[1], jogo[2]);
     printf("\n\t-------------\t-------------");
     printf("\n\t  4 | 5 | 6  \t  %c | %c | %c", jogo[3], jogo[4], jogo[5]);
@@ -42,23 +43,34 @@ int terminou() {
 
 void resultado() {
     if(terminou()==1)
-        printf("\n\tJOGADOR %d É O VENCEDOR!!!\n", jogador);
+        printf("\n\t%s VENCEU!!!\n", jogador == 1 ? player1 : player2);
     else if(deuvelha()==1)
         printf("\n\tDEU VELHA!!!\n");
 }
 
+void nomes_jogadores() {
+    printf("\n\tDigite o nome do jogador 1: ");
+    scanf(" %[^\n]s", player1);
+    printf("\n\tDigite o nome do jogador 2: ");
+    scanf(" %[^\n]s", player2);
+}
+
 int main(void) {
+
+    system("color 60");
 
     do {
         inicializa();
+        display(jogo);
+        nomes_jogadores();
         do {
             display(jogo);
             if(jogada % 2 == 0)
                 jogador = 1;
             else jogador = 2;
             
-            printf("\n\tJogador %d (%c)\n", jogador, jogador==1 ? 'X':'O');
-            printf("\n\tDigite a posição da jogada: ");
+            printf("\n\t%s [%c]\n", jogador==1 ? player1 : player2, jogador==1 ? 'X':'O');
+            printf("\n\tDigite a posicao da jogada: ");
             scanf("%d", &pos);
             
             if(pos>=1 && pos<=9) {
@@ -73,7 +85,7 @@ int main(void) {
         
         display(jogo);
         resultado();
-        printf("\n\tQuer jogar denovo? <S> Sim <N> Não: ");
+        printf("\n\tQuer jogar denovo? <S> Sim <N> Nao: ");
         scanf(" %c", &reinicio);
         
     } while(toupper(reinicio)=='S');
