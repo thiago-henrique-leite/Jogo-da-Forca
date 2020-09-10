@@ -1,5 +1,5 @@
 //JOGO DA FORCA COMPLETO -IMPLEMENTADO POR THIAGO HENRIQUE LEITE DA SILVA
-//Ultima Atualizacao em 04/setembro/2020
+//Ultima Atualizacao em 06/setembro/2020
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,7 +46,7 @@ char reiniciar, c;
 //BANCO DE PALAVRAS
 char bancodePalavras[100][maxtam] = 
     {
-        "null", "Nome", "Cidade ou País", "Marca", "Objeto", "Profissao", "Animal", "Alimento", "Tem no Hospital", "Time de Futebol",                    //Dicas
+        "null", "Nome", "Cidade ou Pais", "Marca", "Objeto", "Profissao", "Animal", "Alimento", "Tem no Hospital", "Time de Futebol",                    //Dicas
         "Romario", "Alcione", "Marinalva", "Orivaldo", "Claudete", "Pietro", "Jamylle", "Bernardo", "Antonella", "Tobias",                               //Nomes
         "Madrid", "Egito", "Jacarei", "Africa", "Israel", "Singapura", "Bahamas", "Guatemala", "Honduras", "Indonesia",                                  //Cidades ou Países
         "Danone", "Havaianas", "Yamaha", "Lamborghini", "Porsche", "Samsung", "Gillette", "Diesel", "Oakley", "Uber",                                    //Marcas
@@ -95,11 +95,11 @@ void comoJogar() {
     printf("\n\n\t\tComo Jogar:\n");
     printf("\n\t(1) O jogador tem que acertar qual e a palavra proposta, tendo como dica o tema ligado a palavra.");
     printf("\n\t(2) A cada rodada o jogador digita uma letra por vez.");
-    printf("\n\t(3) A cada letra certa, será revelado em que lugar ela se encontra na palavra secreta.");
+    printf("\n\t(3) A cada letra certa, sera revelado em que lugar ela se encontra na palavra secreta.");
     printf("\n\t(4) A cada letra errada, e desenhada uma parte do corpo do enforcado e perde-se uma vida.");
     printf("\n\t(5) O jogo termina se o jogador perder as 7 vidas ou completar a palavra proposta.");
-    printf("\n\t(6) O modo de jogo <1> seleciona uma palavra aleatória do jogo e dá uma dica para o jogador tentar acertar.");
-    printf("\n\t(7) O modo de jogo <2> permite o usuário digitar uma palavra e uma dica para um amigo tentar advinhar.");
+    printf("\n\t(6) O modo de jogo <1> seleciona uma palavra aleatoria do jogo e da uma dica para o jogador tentar acertar.");
+    printf("\n\t(7) O modo de jogo <2> permite o usuario digitar uma palavra e uma dica para um amigo tentar advinhar.");
     printf("\n\t(8) Omitir os acentos na hora da digitacao das palavras.");                     
     printf("\n\n\t>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> PRESSIONE <ENTER> PARA VOLTAR A TELA INICIAL <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\t");
     fflush(stdin);
@@ -114,8 +114,8 @@ void creditos() {
     abertura();
     printf("\n\n\t\tCreditos:\n");
     printf("\n\tJogo desenvolvido por Thiago Henrique Leite da Silva");
-    printf("\n\t3º Semestre de Ciencia da Computacao na Universidade Federal de Sao Paulo (UNIFESP)");
-    printf("\n\tUltima modificacao em 04/09/2020");
+    printf("\n\t3 Semestre de Ciencia da Computacao na Universidade Federal de Sao Paulo (UNIFESP)");
+    printf("\n\tUltima modificacao em 06/09/2020");
     printf("\n\tinstagram.com/thiagoh.leite");
     printf("\n\tgithub.com/thiago-henrique-leite");
     printf("\n\n\tDeus e Fiel");
